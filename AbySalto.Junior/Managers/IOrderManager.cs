@@ -7,5 +7,6 @@ namespace AbySalto.Junior.Managers
         Task<List<Order>> GetOrdersAsync(bool sortByTotal);
         Task<Order?> GetOrderByIdAsync(int id);
         Task<int> CreateOrderAsync(Order order);
+        Task<bool> ChangeStatusOfOrderAsync(int id, OrderStatus status);
     }
 }

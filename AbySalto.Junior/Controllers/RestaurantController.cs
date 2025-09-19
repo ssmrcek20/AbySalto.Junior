@@ -66,5 +66,29 @@ namespace AbySalto.Junior.Controllers
                 return StatusCode(500, new { message = "An error occurred while placing the order." });
             }
         }
+
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> ChangeStatusOfOrder([FromRoute] int id, [FromBody] OrderStatus status)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!Enum.IsDefined(typeof(OrderStatus), status))
+                return BadRequest(new { message = "Invalid status value." });
+
+            try
+            {
+                var updated = await _orderManager.ChangeStatusOfOrderAsync(id, status);
+                if (!updated)
+                    return NotFound(new { message = "Order not found." });
+                return Ok(new { message = "Status changed successfully." });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error changing status of order.");
+                return StatusCode(500, new { message = "An error occurred while changing status of order." });
+            }
+        }
     }
 }

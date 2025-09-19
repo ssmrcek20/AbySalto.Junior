@@ -29,5 +29,16 @@ namespace AbySalto.Junior.Managers
             await _orderRepository.SaveChangesAsync();
             return order.Id;
         }
+
+        public async Task<bool> ChangeStatusOfOrderAsync(int id, OrderStatus status)
+        {
+            var order = await _orderRepository.GetOrderByIdAsync(id);
+            if (order == null)
+                return false;
+
+            order.Status = status;
+            await _orderRepository.SaveChangesAsync();
+            return true;
+        }
     }
 }
