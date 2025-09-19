@@ -11,10 +11,10 @@ namespace AbySalto.Junior.Models
         public required string CustomerName { get; set; }
 
         [Required, EnumDataType(typeof(OrderStatus))]
-        public OrderStatus Status { get; set; }
+        public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
         [Required]
-        public DateTime OrderTime { get; set; }
+        public DateTime OrderTime { get; set; } = DateTime.UtcNow;
 
         [Required, StringLength(50)]
         public required string PaymentMethod { get; set; }
