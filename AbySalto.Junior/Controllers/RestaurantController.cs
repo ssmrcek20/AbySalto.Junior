@@ -16,6 +16,21 @@ namespace AbySalto.Junior.Controllers
             _logger=logger;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetOrders([FromQuery] bool sortByTotal = false)
+        {
+            try
+            {
+                var orders = await _orderManager.GetOrdersAsync(sortByTotal);
+                return Ok(orders);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting orders.");
+                return StatusCode(500, new { message = "An error occurred while getting orders." });
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] Order order)
         {

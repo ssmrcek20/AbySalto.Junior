@@ -10,6 +10,12 @@ namespace AbySalto.Junior.Managers
         {
             _orderRepository = orderRepository;
         }
+
+        public async Task<List<Order>> GetOrdersAsync(bool sortByTotal)
+        {
+            return await _orderRepository.GetOrdersAsync(sortByTotal);
+        }
+
         public async Task<int> CreateOrderAsync(Order order)
         {
             order.TotalAmount = order.Items.Sum(i => i.Price * i.Quantity);
