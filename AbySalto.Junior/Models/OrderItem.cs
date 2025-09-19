@@ -18,7 +18,6 @@ namespace AbySalto.Junior.Models
 
         [Required]
         public int OrderId { get; set; }
-        [Required]
-        public required Order Order { get; set; }
+        public Order? Order { get; set; }
     }
 }
