@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AbySalto.Junior.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AbySalto.Junior.Infrastructure.Database
 {
@@ -21,5 +22,9 @@ namespace AbySalto.Junior.Infrastructure.Database
         {
             return await base.SaveChangesAsync(cancellationToken);
         }
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
     }
 }
