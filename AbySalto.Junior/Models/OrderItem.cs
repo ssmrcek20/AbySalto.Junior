@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace AbySalto.Junior.Models
 {
@@ -18,6 +19,7 @@ namespace AbySalto.Junior.Models
 
         [Required]
         public int OrderId { get; set; }
+        [JsonIgnore]
         public Order? Order { get; set; }
     }
 }
