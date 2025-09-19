@@ -16,6 +16,9 @@ namespace AbySalto.Junior.Controllers
             _logger=logger;
         }
 
+        /// <summary>
+        /// Get all orders. Optionally sorted by total price.
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetOrders([FromQuery] bool sortByTotal = false)
         {
@@ -31,6 +34,9 @@ namespace AbySalto.Junior.Controllers
             }
         }
 
+        /// <summary>
+        /// Get order by ID.
+        /// </summary>
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetOrderById([FromRoute] int id)
@@ -49,6 +55,9 @@ namespace AbySalto.Junior.Controllers
             }
         }
 
+        /// <summary>
+        /// Create new order with items.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] Order order)
         {
@@ -67,6 +76,9 @@ namespace AbySalto.Junior.Controllers
             }
         }
 
+        /// <summary>
+        /// Update order status.
+        /// </summary>
         [HttpPatch]
         [Route("{id}")]
         public async Task<IActionResult> ChangeStatusOfOrder([FromRoute] int id, [FromBody] OrderStatus status)
