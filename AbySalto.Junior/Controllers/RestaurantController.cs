@@ -31,6 +31,24 @@ namespace AbySalto.Junior.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetOrderById([FromRoute] int id)
+        {
+            try
+            {
+                var order = await _orderManager.GetOrderByIdAsync(id);
+                if (order == null)
+                    return NotFound(new { message = "Order not found." });
+                return Ok(order);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting order by id.");
+                return StatusCode(500, new { message = "An error occurred while getting the order." });
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateOrder([FromBody] Order order)
         {

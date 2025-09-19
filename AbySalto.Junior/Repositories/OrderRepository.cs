@@ -20,6 +20,11 @@ namespace AbySalto.Junior.Repositories
             return await query.ToListAsync();
         }
 
+        public async Task<Order?> GetOrderByIdAsync(int id)
+        {
+            return await _context.Orders.Include(o => o.Items).FirstOrDefaultAsync(o => o.Id == id);
+        }
+
         public async Task CreateOrderAsync(Order order)
         {
             await _context.Orders.AddAsync(order);
